@@ -9,11 +9,10 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-
 public class XMLTest {
 	public static void main(String[] args) {
 		try {
-			URL url = new URL("http://openapi.seoul.go.kr:8088/4d4f4d70577a617a3432717a53574b/xml/TbPublicWifiInfo/1/20/");
+			URL url = new URL("http://openapi.seoul.go.kr:8088/4d4f4d70577a617a3432717a53574b/xml/TbPublicWifiInfo/1/100/");
 			InputStream stream = url.openStream();
 			char ch = 0;
 			DocumentBuilderFactory dbFactory = 
@@ -24,18 +23,68 @@ public class XMLTest {
 			doc.getDocumentElement().normalize();
 			System.out.println("Root element:" +
 						doc.getDocumentElement().getNodeName());
-			NodeList nList = doc.getElementsByTagName("row");
+
+			NodeList aList = doc.getElementsByTagName("TbPublicWifiInfo"); //총 데이터 건수 출력
+			Node aNode = aList.item(0);
+			Element aElement = (Element) aNode;
+			System.out.println(getTagValue("list_total_count", aElement)); //총 데이터 건수 출력 종료
+			
+			NodeList nList = doc.getElementsByTagName("row"); // 출력값
 			System.out.println("--------------------");
 			for (int temp = 0; temp < nList.getLength(); temp++) {
 				Node nNode = nList.item(temp);
 				if(nNode.getNodeType() == Node.ELEMENT_NODE) {
 					Element eElement = (Element) nNode;
+					System.out.println("==========================");
 
-					System.out.println("관리번호" +
+					
+					System.out.println("거리 " +
 							getTagValue("X_SWIFI_MGR_NO", eElement));
 					
-					System.out.println("자치구" +
+					System.out.println("관리번호 " +
+							getTagValue("X_SWIFI_MGR_NO", eElement));
+					
+					System.out.println("자치구 " +
 							getTagValue("X_SWIFI_WRDOFC", eElement));
+					
+					System.out.println("와이파이명 " +
+							getTagValue("X_SWIFI_MAIN_NM", eElement));
+					
+					System.out.println("도로명주소 " +
+							getTagValue("X_SWIFI_ADRES1", eElement));
+					
+					System.out.println("상세주소 " +
+							getTagValue("X_SWIFI_ADRES2", eElement));
+					
+					System.out.println("설치위치 ");
+					
+					System.out.println("설치유형 " +
+							getTagValue("X_SWIFI_INSTL_TY", eElement));
+					
+					System.out.println("설치기관 " +
+							getTagValue("X_SWIFI_INSTL_MBY", eElement));
+					
+					System.out.println("망종류 " +
+							getTagValue("X_SWIFI_CMCWR", eElement));
+					
+					System.out.println("설치년도 " +
+							getTagValue("X_SWIFI_CNSTC_YEAR", eElement));
+					
+					System.out.println("실내외구분 " +
+							getTagValue("X_SWIFI_INOUT_DOOR", eElement));
+					
+					System.out.println("와이파이 접속 환경 ");
+					
+					System.out.println("X좌표 " +
+							getTagValue("LAT", eElement));
+					
+					System.out.println("Y좌표 " +
+							getTagValue("LNT", eElement));
+					
+					System.out.println("작업일자 " +
+							getTagValue("WORK_DTTM", eElement));
+					System.out.println("==========================");
+					System.out.println();
 				}
 			}
 			

@@ -31,13 +31,14 @@ public class XMLTest {
 			
 			NodeList nList = doc.getElementsByTagName("row"); // 출력값
 			System.out.println("--------------------");
+			
 			for (int temp = 0; temp < nList.getLength(); temp++) {
 				Node nNode = nList.item(temp);
 				if(nNode.getNodeType() == Node.ELEMENT_NODE) {
 					Element eElement = (Element) nNode;
 					System.out.println("==========================");
 
-					
+			
 					System.out.println("거리 " +
 							getTagValue("X_SWIFI_MGR_NO", eElement));
 					

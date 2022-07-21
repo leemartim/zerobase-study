@@ -93,7 +93,6 @@ public class XMLTest {
 			e.printStackTrace();
 		}
 	}
-	
 
 	private static String getTagValue(String sTag, Element eElement) {
 		// TODO Auto-generated method stub
